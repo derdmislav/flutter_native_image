@@ -5,7 +5,6 @@ import android.content.Context;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.MethodChannel;
-import io.flutter.plugin.common.PluginRegistry;
 
 /**
  * FlutterNativeImagePlugin
@@ -13,17 +12,10 @@ import io.flutter.plugin.common.PluginRegistry;
 public class FlutterNativeImagePlugin implements FlutterPlugin {
   private static final String CHANNEL_NAME = "flutter_native_image";
   private MethodChannel channel;
-  /**
-   * Plugin registration.
-   */
-  public static void registerWith(PluginRegistry.Registrar registrar) {
-    final FlutterNativeImagePlugin plugin = new FlutterNativeImagePlugin();
-    plugin.setupChannel(registrar.messenger(), registrar.context());
-  }
 
   @Override
   public void onAttachedToEngine(FlutterPlugin.FlutterPluginBinding binding) {
-    setupChannel(binding.getFlutterEngine().getDartExecutor(), binding.getApplicationContext());
+    setupChannel(binding.getBinaryMessenger(), binding.getApplicationContext());
   }
 
   @Override
